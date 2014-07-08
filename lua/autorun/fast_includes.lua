@@ -1,16 +1,17 @@
-/*======================
+/*================================
 	Advanced includes
 	
 	This file for shared side!
 	
 		Made by SkyAngeLoL
-======================*/
+================================*/
+/*
 
+*/
 /*=================
 	Single file
 =================*/
 
-// Client side
 function includeCL(file)
 	if SERVER then 
 		
@@ -23,7 +24,6 @@ function includeCL(file)
 	end
 end
 
-// Chared side
 function includeSH(file)
 	if SERVER then
 		
@@ -34,7 +34,6 @@ function includeSH(file)
 	include(file)
 end
 
-// Server side
 function includeSV(file)
 	if SERVER then 
 		
@@ -44,7 +43,7 @@ function includeSV(file)
 end
 
 /*=============
-	Folder 
+	Folders
 =============*/
 
 function includeCLFolder(folder, zone)
@@ -52,6 +51,28 @@ function includeCLFolder(folder, zone)
 	if #Files == 0 then return false, "files not found" end
 	
 	for k, v in pairs(Files) do
+		includeCL(folder.."/"..v)
+	end
+end
+
+function includeSHFolder(folder, zone)
+	local Files = file.Find(folder.."/*.lua", zone or "LUA")
+	if #Files == 0 then return false, "files not found" end
+	
+	for k, v in pairs(Files) do
 		includeSH(folder.."/"..v)
 	end
+end
+
+function includeSVFolder(folder, zone)
+	local Files = file.Find(folder.."/*.lua", zone or "LUA")
+	if #Files == 0 then return false, "files not found" end
+	
+	for k, v in pairs(Files) do
+		includeSV(folder.."/"..v)
+	end
+end
+
+function includeRSFolder(folder, zone)
+	
 end
