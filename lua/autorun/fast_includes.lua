@@ -63,7 +63,7 @@ function fi.includeCLFolder(folder, zone)
 		fi.includeCL(folder.."/"..v)
 	end
 	
-	return true
+	return true, "true", Files
 end
 
 function fi.includeSHFolder(folder, zone)
@@ -74,7 +74,7 @@ function fi.includeSHFolder(folder, zone)
 		fi.includeSH(folder.."/"..v)
 	end
 	
-	return true
+	return true, "true", Files
 end
 
 function fi.includeSVFolder(folder, zone)
@@ -85,7 +85,7 @@ function fi.includeSVFolder(folder, zone)
 		fi.includeSV(folder.."/"..v)
 	end
 	
-	return true
+	return true, "true", Files
 end
 
 function fi.includeRSFolder(folder, zone)
@@ -102,7 +102,7 @@ function fi.includeRSFolder(folder, zone)
 		end
 	end
 	
-	return true
+	return true, "true", Files
 end
 
 /*=============
