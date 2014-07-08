@@ -12,7 +12,9 @@
 	Single file
 =================*/
 
-function includeCL(file)
+fi = {}
+
+function fi.includeCL(file)
 	if SERVER then 
 		
 			AddCSLuaFile(file)
@@ -24,7 +26,7 @@ function includeCL(file)
 	end
 end
 
-function includeSH(file)
+function fi.includeSH(file)
 	if SERVER then
 		
 			AddCSLuaFile(file) 
@@ -34,7 +36,7 @@ function includeSH(file)
 	include(file)
 end
 
-function includeSV(file)
+function fi.includeSV(file)
 	if SERVER then 
 		
 			include(file) 
@@ -46,33 +48,47 @@ end
 	Folders
 =============*/
 
-function includeCLFolder(folder, zone)
+function fi.includeCLFolder(folder, zone)
 	local Files = file.Find(folder.."/*.lua", zone or "LUA")
-	if #Files == 0 then return false, "files not found" end
+	if #Files == 0 then return false, "folder is empty" end
 	
 	for k, v in pairs(Files) do
-		includeCL(folder.."/"..v)
+		fi.includeCL(folder.."/"..v)
 	end
 end
 
-function includeSHFolder(folder, zone)
+function fi.includeSHFolder(folder, zone)
 	local Files = file.Find(folder.."/*.lua", zone or "LUA")
-	if #Files == 0 then return false, "files not found" end
+	if #Files == 0 then return false, "folder is empty" end
 	
 	for k, v in pairs(Files) do
-		includeSH(folder.."/"..v)
+		fi.includeSH(folder.."/"..v)
 	end
 end
 
-function includeSVFolder(folder, zone)
+function fi.includeSVFolder(folder, zone)
 	local Files = file.Find(folder.."/*.lua", zone or "LUA")
-	if #Files == 0 then return false, "files not found" end
+	if #Files == 0 then return false, "folder is empty" end
 	
 	for k, v in pairs(Files) do
-		includeSV(folder.."/"..v)
+		fi.includeSV(folder.."/"..v)
 	end
 end
 
-function includeRSFolder(folder, zone)
+function fi.includeRSFolder(folder, zone)
 	
 end
+
+/*=============
+	Globals
+=============*/
+
+includeCL = fi.includeCL
+includeSH = fi.includeSH
+includeSV = fi.includeSV
+
+includeCLFolder = fi.includeCLFolder
+includeSHFolder = fi.includeSHFolder
+includeSVFolder = fi.includeSVFolder
+
+includeRSFolder = fi.includeRSFolder
