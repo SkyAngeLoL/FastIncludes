@@ -19,6 +19,14 @@
 =================*/
 
 fi = {}
+fi.Debug = false
+
+
+function fi.DebugPrint(txt, tab)
+	if not fi.Debug then return end
+	
+	print("[Debug]"..string.rep("\t", tab or 1), txt)
+end
 
 function fi.includeCL(file)
 	if SERVER then 
@@ -28,8 +36,10 @@ function fi.includeCL(file)
 	else --if CLIENT then 
 		
 			include(file) 
-		
+			
 	end
+	
+	fi.DebugPrint("To client - "..file) // For printing on both sides
 end
 
 function fi.includeSH(file)
@@ -40,13 +50,17 @@ function fi.includeSH(file)
 	end
 	
 	include(file)
+	
+	fi.DebugPrint("To shared - "..file)
 end
 
 function fi.includeSV(file)
 	if SERVER then 
 		
 			include(file) 
-		
+			
+			fi.DebugPrint("To server - "..file) // Only server
+			
 	end
 end
 
@@ -56,7 +70,10 @@ end
 
 function fi.includeCLFolder(folder, zone)
 	local Files = file.Find(folder.."/*.lua", zone or "LUA")
+	
 	if #Files == 0 then return false, "folder is empty" end
+	
+	fi.DebugPrint("Find "..#Files.." files in client folder "..folder, 0)
 	
 	for k, v in pairs(Files) do
 		fi.includeCL(folder.."/"..v)
@@ -67,7 +84,10 @@ end
 
 function fi.includeSHFolder(folder, zone)
 	local Files = file.Find(folder.."/*.lua", zone or "LUA")
+	
 	if #Files == 0 then return false, "folder is empty" end
+	
+	fi.DebugPrint("Find "..#Files.." files in shared folder "..folder, 0)
 	
 	for k, v in pairs(Files) do
 		fi.includeSH(folder.."/"..v)
@@ -78,7 +98,10 @@ end
 
 function fi.includeSVFolder(folder, zone)
 	local Files = file.Find(folder.."/*.lua", zone or "LUA")
+	
 	if #Files == 0 then return false, "folder is empty" end
+	
+	fi.DebugPrint("Find "..#Files.." files in server folder "..folder, 0)
 	
 	for k, v in pairs(Files) do
 		fi.includeSV(folder.."/"..v)
@@ -89,7 +112,10 @@ end
 
 function fi.includeRSFolder(folder, zone)
 	local Files = file.Find(folder.."/*.lua", zone or "LUA")
+	
 	if #Files == 0 then return false, "folder is empty" end
+	
+	fi.DebugPrint("Find "..#Files.." files in folder "..folder, 0)
 	
 	for k, v in pairs(Files) do
 		if string.Left(v, 3) == "cl_" then
@@ -119,5 +145,4 @@ includeSVFolder = fi.includeSVFolder
 includeRSFolder = fi.includeRSFolder
 
 /**/
-
 MsgC(Color(0, 255, 0, 255), "[GLua+] ") MsgC(Color(200, 200, 200), "fast_includes.lua\n")
