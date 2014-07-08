@@ -5,14 +5,21 @@
 	
 		Made by SkyAngeLoL
 ================================*/
-/*
+/*=====
+	
+	includeCL("lua/myaddon/client_file.lua") - for client side
+	includeSH("lua/myaddon/shared_file.lua") - for shared sides
+	includeSV("lua/myaddon/server_file.lua") - for server side
 
-*/
+	includeRSFolder("lua/myaddon") - loading all files from folder with tags "cl_" , "sv_" and other...
+	
+=====*/
 /*=================
 	Single file
 =================*/
 
-fi = {}
+fi = fi or {}
+fi.UseGlobals = fi.UseGlobals or true // For pre changing variable
 
 function fi.includeCL(file)
 	if SERVER then 
@@ -76,19 +83,31 @@ function fi.includeSVFolder(folder, zone)
 end
 
 function fi.includeRSFolder(folder, zone)
+	local Files = file.Find(folder.."/*.lua", zone or "LUA")
 	
+	for k, v in pairs(Files) do
+		if v:left(3) == "cl_" then
+			fi.includeCL(folder.."/"..v)
+		elseif v:left(3) == "sv_" then
+			fi.includeSV(folder.."/"..v)
+		else
+			fi.includeSH(folder.."/"..v)
+		end
+	end
 end
 
 /*=============
 	Globals
 =============*/
 
-includeCL = fi.includeCL
-includeSH = fi.includeSH
-includeSV = fi.includeSV
+if fi.UseGlobals then
+	includeCL = fi.includeCL
+	includeSH = fi.includeSH
+	includeSV = fi.includeSV
 
-includeCLFolder = fi.includeCLFolder
-includeSHFolder = fi.includeSHFolder
-includeSVFolder = fi.includeSVFolder
+	includeCLFolder = fi.includeCLFolder
+	includeSHFolder = fi.includeSHFolder
+	includeSVFolder = fi.includeSVFolder
 
-includeRSFolder = fi.includeRSFolder
+	includeRSFolder = fi.includeRSFolder
+end
