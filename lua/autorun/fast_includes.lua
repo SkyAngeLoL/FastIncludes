@@ -18,8 +18,7 @@
 	Single file
 =================*/
 
-fi = fi or {}
-fi.UseGlobals = fi.UseGlobals or true // For pre changing variable
+fi = {}
 
 function fi.includeCL(file)
 	if SERVER then 
@@ -109,16 +108,16 @@ end
 	Globals
 =============*/
 
-if fi.UseGlobals then
-	includeCL = fi.includeCL
-	includeSH = fi.includeSH
-	includeSV = fi.includeSV
+includeCL = fi.includeCL
+includeSH = fi.includeSH
+includeSV = fi.includeSV
 
-	includeCLFolder = fi.includeCLFolder
-	includeSHFolder = fi.includeSHFolder
-	includeSVFolder = fi.includeSVFolder
+includeCLFolder = fi.includeCLFolder
+includeSHFolder = fi.includeSHFolder
+includeSVFolder = fi.includeSVFolder
 
-	includeRSFolder = fi.includeRSFolder
-end
+includeRSFolder = fi.includeRSFolder
+
+/**/
 
 MsgC(Color(0, 255, 0, 255), "[GLua+] ") MsgC(Color(200, 200, 200), "fast_includes.lua\n")
