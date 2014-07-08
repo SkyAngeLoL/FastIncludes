@@ -7,17 +7,17 @@ Fast includes functions
 ```lua
 includeCL("lua/myaddon/client_file.lua")
 ```
-for client side
+For client side
 
 ```lua
 includeSH("lua/myaddon/shared_file.lua")
 ```
-for shared sides
+For shared sides
 
 ```lua
 includeSV("lua/myaddon/server_file.lua")
 ```
-for server side
+For server side
 
 ```lua
 includeCLFolder("lua/myaddon")
@@ -25,9 +25,6 @@ includeSHFolder("lua/myaddon")
 includeSVFolder("lua/myaddon")
 ```
 Loading all files to the needed side
-
-
-
 
 ```lua
 includeRSFolder("lua/myaddon")
