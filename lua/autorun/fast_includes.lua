@@ -80,7 +80,7 @@ function fi.includeCLFolder(folder, zone, r)
 	end
 	if r then
 		for k, v in pairs(Folders) do
-			fi.includeCLFolder(folder.."/"..v)
+			fi.includeCLFolder(folder.."/"..v, zone, true)
 		end
 	end
 	
@@ -100,7 +100,7 @@ function fi.includeSHFolder(folder, zone, r)
 	
 	if r then
 		for k, v in pairs(Folders) do
-			fi.includeSHFolder(folder.."/"..v)
+			fi.includeSHFolder(folder.."/"..v, zone, true)
 		end
 	end
 	
@@ -120,7 +120,7 @@ function fi.includeSVFolder(folder, zone, r)
 	
 	if r then
 		for k, v in pairs(Folders) do
-			fi.includeSVFolder(folder.."/"..v)
+			fi.includeSVFolder(folder.."/"..v, zone, true)
 		end
 	end
 	
@@ -146,7 +146,7 @@ function fi.includeRSFolder(folder, zone, r)
 	
 	if r then
 		for k, v in pairs(Folders) do
-			fi.includeRSFolder(folder.."/"..v)
+			fi.includeRSFolder(folder.."/"..v, zone, true)
 		end
 	end
 	
