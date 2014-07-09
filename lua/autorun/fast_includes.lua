@@ -68,8 +68,8 @@ end
 	Folders
 =============*/
 
-function fi.includeCLFolder(folder, zone)
-	local Files = file.Find(folder.."/*.lua", zone or "LUA")
+function fi.includeCLFolder(folder, zone, r)
+	local Files, Folders = file.Find(folder.."/*.lua", zone or "LUA")
 	
 	if #Files == 0 then return false, "folder is empty" end
 	
@@ -78,12 +78,17 @@ function fi.includeCLFolder(folder, zone)
 	for k, v in pairs(Files) do
 		fi.includeCL(folder.."/"..v)
 	end
+	if r then
+		for k, v in pairs(Folders) do
+			fi.includeCLFolder(folder.."/"..v, zone, true)
+		end
+	end
 	
 	return true, "true", Files
 end
 
-function fi.includeSHFolder(folder, zone)
-	local Files = file.Find(folder.."/*.lua", zone or "LUA")
+function fi.includeSHFolder(folder, zone, r)
+	local Files, Folders = file.Find(folder.."/*.lua", zone or "LUA")
 	
 	if #Files == 0 then return false, "folder is empty" end
 	
@@ -93,11 +98,17 @@ function fi.includeSHFolder(folder, zone)
 		fi.includeSH(folder.."/"..v)
 	end
 	
+	if r then
+		for k, v in pairs(Folders) do
+			fi.includeSHFolder(folder.."/"..v, zone, true)
+		end
+	end
+	
 	return true, "true", Files
 end
 
-function fi.includeSVFolder(folder, zone)
-	local Files = file.Find(folder.."/*.lua", zone or "LUA")
+function fi.includeSVFolder(folder, zone, r)
+	local Files, Folders = file.Find(folder.."/*.lua", zone or "LUA")
 	
 	if #Files == 0 then return false, "folder is empty" end
 	
@@ -107,11 +118,17 @@ function fi.includeSVFolder(folder, zone)
 		fi.includeSV(folder.."/"..v)
 	end
 	
+	if r then
+		for k, v in pairs(Folders) do
+			fi.includeSVFolder(folder.."/"..v, zone, true)
+		end
+	end
+	
 	return true, "true", Files
 end
 
-function fi.includeRSFolder(folder, zone)
-	local Files = file.Find(folder.."/*.lua", zone or "LUA")
+function fi.includeRSFolder(folder, zone, r)
+	local Files, Folders = file.Find(folder.."/*.lua", zone or "LUA")
 	
 	if #Files == 0 then return false, "folder is empty" end
 	
@@ -124,6 +141,12 @@ function fi.includeRSFolder(folder, zone)
 			fi.includeSV(folder.."/"..v)
 		else
 			fi.includeSH(folder.."/"..v)
+		end
+	end
+	
+	if r then
+		for k, v in pairs(Folders) do
+			fi.includeRSFolder(folder.."/"..v, zone, true)
 		end
 	end
 	
