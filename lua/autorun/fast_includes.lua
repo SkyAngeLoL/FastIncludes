@@ -14,13 +14,9 @@
 	includeRSFolder("lua/myaddon") - loading all files from folder with tags "cl_" , "sv_" and other...
 	
 =====*/
-/*=================
-	Single file
-=================*/
 
 fi = {}
 fi.Debug = false
-
 
 function fi.DebugPrint(txt, tab)
 	if not fi.Debug then return end
@@ -28,38 +24,60 @@ function fi.DebugPrint(txt, tab)
 	print("[Debug]"..string.rep("\t", tab or 1), txt)
 end
 
-function fi.includeCL(file)
+/*=================
+	Single file
+=================*/
+
+function fi.includeCL(file, time_dl)
 	if SERVER then 
 		
 			AddCSLuaFile(file)
 		
 	else --if CLIENT then 
-		
-			include(file) 
+			
+			if time_dl and time_dl ~= 0 then
+				timer.Simple(time_dl, function()
+					include(file)
+				end)
+			else
+				include(file) 
+			end
 			
 	end
 	
 	fi.DebugPrint("To client - "..file) // For printing on both sides
 end
 
-function fi.includeSH(file)
+function fi.includeSH(file, time_dl)
 	if SERVER then
 		
 			AddCSLuaFile(file) 
 		
 	end
 	
-	include(file)
+	if time_dl and time_dl ~= 0 then
+		timer.Simple(time_dl, function()
+			include(file)
+		end)
+	else
+		include(file) 
+	end
 	
 	fi.DebugPrint("To shared - "..file)
 end
 
-function fi.includeSV(file)
+function fi.includeSV(file, time_dl)
 	if SERVER then 
 		
-			include(file) 
+			if time_dl and time_dl ~= 0 then
+				timer.Simple(time_dl, function()
+					include(file)
+				end)
+			else
+				include(file) 
+			end
 			
-			fi.DebugPrint("To server - "..file) // Only server
+			fi.DebugPrint("To server - "..file)
 			
 	end
 end
