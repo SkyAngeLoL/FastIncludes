@@ -1,11 +1,11 @@
-/*================================
+--[[================================
 	Advanced includes
 	
 	This file for shared side!
 	
 		Made by SkyAngeLoL
-================================*/
-/*=====
+================================]]--
+--[[=====
 	
 	includeCL("lua/myaddon/client_file.lua") - for client side
 	includeSH("lua/myaddon/shared_file.lua") - for shared sides
@@ -13,10 +13,14 @@
 
 	includeRSFolder("lua/myaddon") - loading all files from folder with tags "cl_" , "sv_" and other...
 	
-=====*/
+=====]]--
 
 fi = {}
 fi.Debug = false
+
+_FASTINCLUDES_ = true -- "#define" for checing this addon 
+
+MsgC(Color(0, 255, 0, 255), "[GLua+] ") MsgC(Color(200, 200, 200), "fast_includes.lua\n")
 
 function fi.DebugPrint(txt, tab)
 	if not fi.Debug then return end
@@ -24,9 +28,9 @@ function fi.DebugPrint(txt, tab)
 	print("[Debug]"..string.rep("\t", tab or 1), txt)
 end
 
-/*=================
+--[[=================
 	Single file
-=================*/
+=================]]--
 
 function fi.includeCL(file, time_dl)
 	if SERVER then 
@@ -82,9 +86,9 @@ function fi.includeSV(file, time_dl)
 	end
 end
 
-/*=============
+--[[=============
 	Folders
-=============*/
+=============]]--
 
 function fi.includeCLFolder(folder, zone, r)
 	local Files, Folders = file.Find(folder.."/*.lua", zone or "LUA")
@@ -171,9 +175,9 @@ function fi.includeRSFolder(folder, zone, r)
 	return true, "true", Files
 end
 
-/*=============
+--[[=============
 	Globals
-=============*/
+=============]]
 
 includeCL = fi.includeCL
 includeSH = fi.includeSH
@@ -184,6 +188,3 @@ includeSHFolder = fi.includeSHFolder
 includeSVFolder = fi.includeSVFolder
 
 includeRSFolder = fi.includeRSFolder
-
-/**/
-MsgC(Color(0, 255, 0, 255), "[GLua+] ") MsgC(Color(200, 200, 200), "fast_includes.lua\n")
